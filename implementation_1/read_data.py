@@ -49,3 +49,9 @@ X_train = vectorizer.fit_transform(train_data['review'])
 y_train = train_data['label']
 X_test = vectorizer.transform(test_data['review'])
 y_test = test_data['label']
+
+bigram_vectorizer = TfidfVectorizer(stop_words='english', ngram_range=(1, 2))
+X_train_bigram = bigram_vectorizer.fit_transform(train_data['review'])
+y_train = train_data['label']
+X_test_bigram = bigram_vectorizer.transform(test_data['review'])
+y_test = test_data['label']
