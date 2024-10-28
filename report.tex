@@ -24,8 +24,6 @@ Utrecht University}
 %\break
 %\break
 
-%\section{Introduction}
-%In this report, we examine the effectiveness of three classification models: classification trees, bagging, and random forests. Using the Eclipse bug dataset, we aim to forecast whether post-release bugs will occur by leveraging pre-release bug data and a number of different complexity metrics. Lastly, we evaluate and compare the performance of each model in terms of accuracy, precision, and recall.
 
 \begin{abstract}
 
@@ -41,35 +39,55 @@ Cras malesuada sagittis risus, a rhoncus diam rhoncus quis. Phasellus nulla turp
 
 \section{Introduction}
 
-In the modern age, technolog
-With the advent of generative AI, generating fake reviews is becoming easier than ever. Tools like ChatGPT allows malicious agents to automate the process of writing fake reviews on a large scale, tricking costumers into purchasing low-quality or even actively harmful products [1].    
+The internet has become one of the main tools for coerce, allowing people to purchase products and services from the comfort of their homes. Online shopping is widely popular, with surveys suggesting that in the EU, 70\% of the population purchased at least one item online in 2023 [1]. This also applies to booking services such as hotels, with 73\% of people preferring to make their reservations online [2]. 
 
-It is, therefore, imperative to develop methods to accurately discern between genuine and deceptive reviews online. 
+When making online transactions, user reviews play a significant part. Potential consumers can read recounts of other users' experiences with a specific product or service to inform their purchase, and 93\% of costumers say that their decision to buy a product was swayed by such reviews [3].  
+
+While online reviews can be helpful when deciding what to buy, they can also be used to influence customers in fraudulent ways. Companies can use fake reviews to improve the ratings to entice people to buy their products or to improve their own ratings in online review boards such as Google Maps or Yelp [4].
+What's more, with the advent of generative AI, generating fake reviews is becoming easier than ever. Tools like ChatGPT allows malicious agents to automate the process of writing fake reviews on a large scale, tricking costumers into purchasing low-quality or even actively harmful products [5].    
+
+It is therefore imperative to develop methods to accurately discern between genuine and deceptive reviews online. This can be done with the use of predictive models and machine-learning technology. Samples of genuine and fake reviews can be used to train a computer model that will then be able to classify new reviews into one of these two categories.      
+In this work, we aim to implement and compare different  types of predictive models to ascertain the most effective one. The selected models for this study are:
+
+\begin{itemize}
+  \item Multinomial naive Bayes (generative linear classifier).
+  \item Logistic regression with Lasso penalty (discriminative linear classifier).
+  \item Classification trees (non-linear classifier).
+  \item Random forests (ensemble of non-linear classifiers).
+\end{itemize}
+
+For each model, we prepare two implementations: one with unigram features and one with bigram features. In addition to our main goal, we seek to find answers to the following sub-questions:
+
+\begin{enumerate}
+\item How does the performance of the generative linear model (multinomial naive Bayes)
+compare to the discriminative linear model (regularized logistic regression)?
+\item Does the random forest model improve the performance of the linear classifiers?
+\item Does the addition of bigram features improve performance? 
+\item What five terms are the most indicative of a truthful review?
+\item What five terms are the most deceptive of a truthful review?
+\end{enumerate}
+
+
+\section{Related Works}
+Do wee need a related works section?
 
 \section{Data Description}
 
-For this study, we employ the dataset assembled by Otis et al. [2] containing a collection of negative reviews of different hotels in the city of Chicago, Illinois. The first part of the dataset consists of genuine reviews collected from the following review websites: Expe-dia, Hotels.com, Orbitz, Priceline, TripAdvisor, and Yelp. The second part consists of fake reviews created by anonymous workers from Amazon's crowdsourcing platform Mechanical Turk.   
+For this study, we employ the dataset assembled by Otis et al. [6] containing a collection of negative reviews of different hotels in the city of Chicago, Illinois. The first part of the dataset consists of genuine reviews collected from the following review websites: Expe-dia, Hotels.com, Orbitz, Priceline, TripAdvisor, and Yelp. The second part consists of fake reviews created by anonymous workers from Amazon's crowdsourcing platform Mechanical Turk.   
 
-In total, the dataset contains 800 reviews, 400 truthful and 400 deceptive, saved as \texttt{.txt} files. The dataset is divided into five folds, each with 160 reviews. Folds 1 to 4 are used as the training data for our model, while fold 5 is used as the test data. 
+In total, the dataset contains 800 reviews, 400 truthful and 400 deceptive, saved as \texttt{.txt} files. The dataset is divided into five folds, each with 80 truthful and 80 deceptive reviews. Folds 1 to 4 are used as the training data for our model, while fold 5 is used as the test data. 
 
 
 
 \section{Methodology}
 
-The selected models for this study are:
-
-\begin{enumerate}
-  \item Multinomial naive Bayes (generative linear classifier).
-  \item Logistic regression with Lasso penalty (discriminative linear classifier).
-  \item Classification trees (non-linear classifier).
-  \item Random forests (ensemble of non-linear classifiers).
-\end{enumerate}
-
-For each model, we prepare two implementations: one with unigram features and one with bigram features. 
 
 \section{Results}
 
 As performance measures, we employ accuracy, precision, recall and the F1 score.
+
+\subsection{Statistical significance of changes in accuracy}
+
 
 \section{Discussion}
 
@@ -79,15 +97,33 @@ As performance measures, we employ accuracy, precision, recall and the F1 score.
 
 % [1] M. Ott, Y. Choi, C. Cardie, and J.T. Hancock. 2011. Finding Deceptive Opinion Spam by Any Stretch of the Imagination. In Proceedings of the 49th Annual Meeting of the Association for Computational Linguistics: Human Language Technologies.
 
-[1] S. Lazzaro, “Generative AI is accelerating the spread of fake reviews and malicious apps,” Fortune, Aug. 29, 2024. https://fortune.com/2024/08/29/
+[1] Eurostat, “E-commerce statistics for individuals,” \textit{Publications Office of the European Union}. ec.europa.eu, Apr. 2024, https://ec.europa.eu/
+eurostat/statistics-explained/index.php?title=E-commerce\_statistics\_for\_individual 
+(accessed Oct. 28, 2024)
+
+\hfill
+
+\noindent [2] D. van Zeeburg, “60+ online travel booking statistics \& trends,” \textit{TravelPerk}, 2024. https://www.travelperk.com/
+blog/online-travel-booking-statistics/
+(accessed Oct. 28, 2024)
+
+\hfill
+
+\noindent [3] D. Kaemingk, “Online reviews statistics to know in 2022,” \textit{Qualtrics}, Oct. 30, 2020. https://www.qualtrics.com/blog/online-review-stats/ (accessed Oct. 28, 2024)
+
+\hfill
+
+\noindent M. Mccluskey, “Inside the War on Fake Reviews,” \textit{Time}, Jul. 06, 2022. https://time.com/6192933/fake-reviews-regulation/ (acessed Oct. 28, 2024)
+
+\hfill
+
+\noindent [5] S. Lazzaro, “Generative AI is accelerating the spread of fake reviews and malicious apps,” \textit{Fortune}, Aug. 29, 2024. https://fortune.com/2024/08/29/
 generative-ai-fake-reviews-bad-apps/ (accessed Oct. 24, 2024).
 
 \hfill
 
-\noindent [2] M. Ott, C. Cardie, and J.T. Hancock. 2013. Negative Deceptive Opinion Spam. In Proceedings of the 2013 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies.
+\noindent [6] M. Ott, C. Cardie, and J.T. Hancock., "Negative Deceptive Opinion Spam", In \textit{Proceedings of the 2013 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies}, p.p 497–501, Jun. 2013.  
 \hfill
-
-‌
 
 \end{document}
 
