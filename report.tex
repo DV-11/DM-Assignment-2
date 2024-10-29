@@ -81,13 +81,21 @@ In total, the dataset contains 800 reviews, 400 truthful and 400 deceptive, save
 
 \section{Methodology}
 
+\subsection{Reading the data}
+
+We read the data using \texttt{pandas}, a Python data manipulation library. 
+
+
+
+To create the classification models, we employ the Python machine-learning library \texttt{scikit-learn}, also known as \texttt{sklearn}.
 
 \section{Results}
 
 As performance measures, we employ accuracy, precision, recall and the F1 score.
 
-\subsection{Statistical significance of changes in accuracy}
+\subsection{Statistical significance of difference in accuracy}
 
+To measure the statistical significance of the difference in accuracy between models, we employ McNemar's test.
 
 \section{Discussion}
 
