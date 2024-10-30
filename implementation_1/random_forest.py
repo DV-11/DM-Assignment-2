@@ -9,12 +9,12 @@ from read_data import X_train_bigram, X_test_bigram
 random_forest = RandomForestClassifier(oob_score=True, random_state=42)
 
 parameters = {
-    'n_estimators': [100, 200],
-    'max_depth': [None, 10, 20],
-    'min_samples_split': [2, 5],
+    'n_estimators': [100, 200, 300],
+    'max_depth': [5,10, 15, 20, 40],
+    'min_samples_split': [2, 5, 10, 20],
 }
 
-grid_search = GridSearchCV(random_forest, parameters, cv=5, scoring='accuracy', n_jobs=-1)
+grid_search = GridSearchCV(random_forest, parameters, cv=10, scoring='accuracy', n_jobs=-1)
 grid_search.fit(X_train, y_train)
 
 best_model = grid_search.best_estimator_
@@ -36,7 +36,7 @@ print(f'F1 Score: {f1:.2f}')
 
 # With bigrams
 
-grid_search = GridSearchCV(random_forest, parameters, cv=5, scoring='accuracy', n_jobs=-1)
+grid_search = GridSearchCV(random_forest, parameters, cv=10, scoring='accuracy', n_jobs=-1)
 grid_search.fit(X_train_bigram, y_train)
 
 best_model = grid_search.best_estimator_

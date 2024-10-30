@@ -9,10 +9,10 @@ from read_data import X_train_bigram, X_test_bigram
 multinomial_nb = MultinomialNB()
 
 parameters = {
-    'alpha': [0.1, 0.25, 0.5, 1.0, 1.5, 2.0, 2.5]
+    'alpha': [0.1, 0.25, 0.5, 1.0, 1.5, 2.0, 2.5, 5, 10]
 }
 
-grid_search = GridSearchCV(multinomial_nb, parameters, cv=5, scoring='accuracy', n_jobs=-1)
+grid_search = GridSearchCV(multinomial_nb, parameters, cv=10, scoring='accuracy', n_jobs=-1)
 grid_search.fit(X_train, y_train)
 
 best_model = grid_search.best_estimator_
@@ -33,7 +33,7 @@ print(f'F1 Score: {f1:.2f}')
 
 # With bigrams
 
-grid_search = GridSearchCV(multinomial_nb, parameters, cv=5, scoring='accuracy', n_jobs=-1)
+grid_search = GridSearchCV(multinomial_nb, parameters, cv=10, scoring='accuracy', n_jobs=-1)
 grid_search.fit(X_train_bigram, y_train)
 
 best_model = grid_search.best_estimator_

@@ -9,10 +9,10 @@ from read_data import X_train_bigram, X_test_bigram
 logistic_regression = LogisticRegression(random_state=42, penalty='l1', solver='liblinear')
 
 parameters = {
-    'C': [0.5, 1.0, 1.5, 2.0, 2.5],
+    'C': [1.0, 1.5, 2.0, 2.5, 3.0, 5.0, 10, 25, 50, 75, 100, 150],
 }
 
-grid_search = GridSearchCV(logistic_regression, parameters, cv=5, scoring='accuracy', n_jobs=-1)
+grid_search = GridSearchCV(logistic_regression, parameters, cv=10, scoring='accuracy', n_jobs=-1)
 grid_search.fit(X_train, y_train)
 
 best_model = grid_search.best_estimator_
@@ -33,7 +33,7 @@ print(f'F1 Score: {f1:.2f}')
 
 # With bigrams
 
-grid_search = GridSearchCV(logistic_regression, parameters, cv=5, scoring='accuracy', n_jobs=-1)
+grid_search = GridSearchCV(logistic_regression, parameters, cv=10, scoring='accuracy', n_jobs=-1)
 grid_search.fit(X_train_bigram, y_train)
 
 best_model = grid_search.best_estimator_

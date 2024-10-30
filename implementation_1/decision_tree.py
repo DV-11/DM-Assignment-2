@@ -9,12 +9,12 @@ from read_data import X_train_bigram, X_test_bigram
 decision_tree = DecisionTreeClassifier(random_state=42)
 
 parameters = {
-    'max_depth': [None, 5, 10, 20],
-    'min_samples_split': [2, 5, 10],
+    'max_depth': [5, 10, 20, 40],
+    'min_samples_split': [2, 5, 10, 20, 30],
     'ccp_alpha': [0.005, 0.01, 0.015]
 }
 
-grid_search = GridSearchCV(decision_tree, parameters, cv=5, scoring='accuracy', n_jobs=-1)
+grid_search = GridSearchCV(decision_tree, parameters, cv=10, scoring='accuracy', n_jobs=-1)
 grid_search.fit(X_train, y_train)
 
 best_model = grid_search.best_estimator_
@@ -28,14 +28,14 @@ recall = recall_score(y_test, y_pred)
 f1 = f1_score(y_test, y_pred)
 
 print('Decision Tree Model performance:')
-print(f'Accuracy: {accuracy:.2f}')
-print(f'Precision: {precision:.2f}')
-print(f'Recall: {recall:.2f}')
-print(f'F1 Score: {f1:.2f}')
+print(f'Accuracy: {accuracy:.3f}')
+print(f'Precision: {precision:.3f}')
+print(f'Recall: {recall:.3f}')
+print(f'F1 Score: {f1:.3f}')
 
 # with bigrams: 
 
-grid_search = GridSearchCV(decision_tree, parameters, cv=5, scoring='accuracy', n_jobs=-1)
+grid_search = GridSearchCV(decision_tree, parameters, cv=10, scoring='accuracy', n_jobs=-1)
 grid_search.fit(X_train_bigram, y_train)
 
 best_model = grid_search.best_estimator_
@@ -49,7 +49,7 @@ recall = recall_score(y_test, y_pred)
 f1 = f1_score(y_test, y_pred)
 
 print('Decision Tree Model performance (with bigrams):')
-print(f'Accuracy: {accuracy:.2f}')
-print(f'Precision: {precision:.2f}')
-print(f'Recall: {recall:.2f}')
-print(f'F1 Score: {f1:.2f}')
+print(f'Accuracy: {accuracy:.3f}')
+print(f'Precision: {precision:.3f}')
+print(f'Recall: {recall:.3f}')
+print(f'F1 Score: {f1:.3f}')
