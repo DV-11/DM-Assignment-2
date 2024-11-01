@@ -42,15 +42,14 @@ for i in range(n_tests):
     for model_name, model in models.items():
         X_train = X_train_unigram if "Uni" in model_name else X_train_bigram
         X_test = X_test_unigram if "Uni" in model_name else X_test_bigram
+
         model.fit(X_train, y_train)
         predictions[model_name] = model.predict(X_test)
 
     # Perform McNemar's test on each model pair and save it in a df for computing the mean and then visualitation
     p_value_matrix = pd.DataFrame(np.nan, index=models.keys(), columns=models.keys())
     results = []
-    # Do mc nemar per pair that exists
     for (model_1, pred_1), (model_2, pred_2) in itertools.combinations(predictions.items(), 2):
-        # Create contingency table forcomputing it
         contingency_table = np.array([
             np.array([(pred_1 == y_test) & (pred_2 == y_test)]).sum(),
             np.array([(pred_1 != y_test) & (pred_2 == y_test)]).sum(),
@@ -74,7 +73,6 @@ if graph_res == True:
     plt.title("McNemar Test p-Value Matrix for Model Comparisons")
     plt.tight_layout()
 
-    # Save the image
     plt.savefig("NemarResult.png")
         
     mask = p_value_final >= adjusted_alpha
@@ -82,7 +80,6 @@ if graph_res == True:
     # Create a custom color map (only shows green for significant values)
     cmap = sns.color_palette(["green"])
     
-    # Plotting
     plt.figure(figsize=(10, 8))
     sns.heatmap(p_value_final, mask=mask, annot=True, fmt=".6f", cmap=cmap, cbar=False,
                 linewidths=.5, linecolor="gray")
